@@ -1037,11 +1037,16 @@ I have executed all of these scripts in windows 10 with a wsl terminal.</p>
 </li>
 </ul>
 <h1 id="user-content-bash"><a class="heading-link" href="#bash">Bash<span aria-hidden="true" class="octicon octicon-link"></span></a></h1>
-<h2 id="user-content-comparison-operators"><a class="heading-link" href="#comparison-operators">Comparison operators:<span aria-hidden="true" class="octicon octicon-link"></span></a></h2>
+<ul>
+<li>Comparison operators:
 <ul>
 <li>Integer comparison</li>
+<li>String comparison</li>
 </ul>
-<pre><code>-eq - is qual to - if [ "$a" -eq "$b" ]
+</li>
+</ul>
+<pre><code># Integer comparison
+-eq - is qual to - if [ "$a" -eq "$b" ]
 -ne - is not equal to - if [ "$a" -ne "$b" ]
 -gt - is greater than - if [ "$a" -gt "$b" ]
 -ge - is greater than or equal to - if [ "$a" -ge "$b" ]
@@ -1051,11 +1056,9 @@ I have executed all of these scripts in windows 10 with a wsl terminal.</p>
 &lt;=  - is less than or qual to - (("$a" &lt;= "$b"))
 &gt;   - is greater than - (("$a" &gt; "$b"))
 &gt;=  - is greater than or equal to - (("$a" &gt;= "$b"))
-</code></pre>
-<ul>
-<li>String comparison</li>
-</ul>
-<pre><code>=   - is equal to - if [ "$a" = "$b" ]
+
+# String comparison
+=   - is equal to - if [ "$a" = "$b" ]
 ==  - is equal to - if [ "$a" == "$b" ]
 !=  - is not equal to - if [ "$a" != "$b" ]
 &lt;   - is less than, in ASCII alphabetical order - if [[ "$a" &lt; "$b" ]]
@@ -1086,7 +1089,25 @@ $LINENO :   Returns the current line number in the Bash script.
 # The read content is "Hello World" in the terminal.
 # This will be directed to / flowed to the test file
 </code></pre>
-<h1 id="user-content-commands"><a class="heading-link" href="#commands">Commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h1>
+<ul>
+<li>
+<p>Different ways to run a script in verbose debug mode</p>
+<ul>
+<li>
+<pre><code>&gt; bash -x ./script_name.sh
+</code></pre>
+</li>
+<li>Use this at the top of the script "#! /bin/bash -x" instead of just "#! /bin/bash"</li>
+<li>Add the line "set -x" at the top of the script. This activates debugging from the point it is written. To stop debugging add the line "set +x" at the point where you want to stop debugging.</li>
+</ul>
+</li>
+<li>
+<p>Setting the language of the terminal to C (If regex does not work properly)</p>
+</li>
+</ul>
+<pre><code>&gt; LANG=C # "C" is the language/locale setting and encoding
+</code></pre>
+<h1 id="user-content-generic-commands"><a class="heading-link" href="#generic-commands">Generic Commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h1>
 <ul>
 <li>Type of Shells supported by the terminal</li>
 </ul>
@@ -1114,7 +1135,20 @@ $LINENO :   Returns the current line number in the Bash script.
 <pre><code>&gt; touch 01_hello.sh
 </code></pre>
 <ul>
-<li>Check files in the directory</li>
+<li>Check files in the directory
+<ul>
+<li>Flags:
+<ul>
+<li>-l   -   additional info</li>
+<li>-lh  -   file size in human readable format</li>
+<li>-lr  -   Sort the o/p in reverse order</li>
+<li>-lt  -   Sort files and directories y time and date of creation/modification</li>
+<li>-lrt -   Sort file names in the last modification time in reverse order.</li>
+<li>-la  -   Show hidden files</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <pre><code>&gt; ls -al
 total 0
@@ -1123,10 +1157,15 @@ drwxrwxrwx 1 deepbaran deepbaran 4096 Sep 30 11:54 ..
 -rwxrwxrwx 1 deepbaran deepbaran    0 Sep 30 11:53 01_hello.sh
 </code></pre>
 <ul>
-<li>To add or remove execute permission to a file [x]</li>
+<li>To add or remove execute permission to a file/directory [x]</li>
 </ul>
 <pre><code>&gt; chmod +x 01_hello.sh # Add execute permission
 &gt; chmod -x 01_hello.sh # remove execute permission
+</code></pre>
+<ul>
+<li>Change file/directory ownership</li>
+</ul>
+<pre><code>&gt; chown owner_name file_name
 </code></pre>
 <ul>
 <li>Execute the script</li>
@@ -1149,6 +1188,11 @@ drwxrwxrwx 1 deepbaran deepbaran 4096 Sep 30 11:54 ..
 <pre><code>&gt; mkdir dir
 </code></pre>
 <ul>
+<li>remove directory</li>
+</ul>
+<pre><code>&gt; rmdir dir
+</code></pre>
+<ul>
 <li>Change directory</li>
 </ul>
 <pre><code>&gt; cd dir
@@ -1157,13 +1201,53 @@ drwxrwxrwx 1 deepbaran deepbaran 4096 Sep 30 11:54 ..
 <ul>
 <li>Write text in a file (Type Ctrl+d to come out of the command)</li>
 </ul>
-<pre><code>cat &gt;&gt; $file_name # This appends the text at the end of the file
-cat &gt; $file_name # This will overwrite the contents in the file
+<pre><code>&gt; cat &gt;&gt; $file_name # This appends the text at the end of the file
+&gt; cat &gt; $file_name # This will overwrite the contents in the file
 </code></pre>
 <ul>
 <li>Print the contents of a file</li>
 </ul>
 <pre><code>&gt; cat test
+&gt; cat -n test # shows line numbers
+&gt; cat file1.txt &gt; file2.txt # copy the contents of file1.txt to file2.txt
+</code></pre>
+<ul>
+<li>Print the contents of a file in reverse order</li>
+</ul>
+<pre><code>&gt; tac test
+</code></pre>
+<ul>
+<li>Display large files (screenful display)
+<ul>
+<li>Navigate:
+<ul>
+<li>ENTER key     -   To scroll down page by line</li>
+<li>Space bar     -   To move to the next page</li>
+<li>b key         -   To move to the previous page</li>
+<li>/ key         -   To search the string</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>&gt; more test
+</code></pre>
+<ul>
+<li>Display the contents of a file or command output one page at a time</li>
+</ul>
+<pre><code>&gt; less test
+</code></pre>
+<ul>
+<li>Display 1st 10 lines of a file</li>
+</ul>
+<pre><code>&gt; head test
+# use the -n option to display more lines
+</code></pre>
+<ul>
+<li>Display last 10 lines of a file</li>
+</ul>
+<pre><code>&gt; tail test
+# use the -n option to display more lines
 </code></pre>
 <ul>
 <li>To fetch the manual of a command</li>
@@ -1178,26 +1262,153 @@ cat &gt; $file_name # This will overwrite the contents in the file
 echo "20.5+5" | bc
 </code></pre>
 <ul>
-<li>Setting the language of the terminal to C (If regex does not work properly)</li>
-</ul>
-<pre><code>&gt; LANG=C # "C" is the language/locale setting and encoding
-</code></pre>
-<ul>
 <li>Exit the shell script</li>
 </ul>
 <pre><code>&gt; exit
 </code></pre>
 <ul>
-<li>
-<p>Different ways to run a script in verbose debug mode</p>
-<ul>
-<li>
-<pre><code>&gt; bash -x ./script_name.sh
+<li>Remove a file or directory</li>
+</ul>
+<pre><code>&gt; rm file_path
+&gt; rm -f file_path # forcefully remove a file
+&gt; rm -r dir_path # recursively remove an empty directory
+&gt; rm -rf file_path # recursively forcefully remove directory with contents 
 </code></pre>
-</li>
-<li>Use this at the top of the script "#! /bin/bash -x" instead of just "#! /bin/bash"</li>
-<li>Add the line "set -x" at the top of the script. This activates debugging from the point it is written. To stop debugging add the line "set +x" at the point where you want to stop debugging.</li>
+<ul>
+<li>display the username of the current user</li>
 </ul>
-</li>
+<pre><code>&gt; whoami
+</code></pre>
+<ul>
+<li>copy files and directories</li>
 </ul>
+<pre><code>&gt; cp file file_backup
+# to copy a directory, including all its files and subdirectories, use any of the below flags:
+# -r
+# -R
+</code></pre>
+<ul>
+<li>Move files and directories</li>
+</ul>
+<pre><code>&gt; mv new_file.txt file.txt
+# This can be used to rename files or directories too
+</code></pre>
+<ul>
+<li>locate the executable files or location of a program from the file system.</li>
+</ul>
+<pre><code>&gt; which nano
+</code></pre>
+<ul>
+<li>Set aliases to most used commands</li>
+</ul>
+<pre><code>&gt; alias wr="cd /scripts"
+</code></pre>
+<ul>
+<li>All the linux commands used in the past in the current terminal session</li>
+</ul>
+<pre><code>&gt; history
+</code></pre>
+<ul>
+<li>Search a file by file name in the database</li>
+</ul>
+<pre><code>&gt; locate file_name
+# it faster then find command
+# add -i to make the search case in-sensitive
+# To search a file that contains two or more words, use asterisk (*)
+
+&gt; find ./scripts -name *.txt
+# use the findcommand to locate files within a given directory.
+</code></pre>
+<ul>
+<li>Search content from a file or command output</li>
+</ul>
+<pre><code>&gt; history | grep which
+# This will search for all which contents from the history command output
+# The history command output is passed to the "grep which" command as argument because of the pipe.
+</code></pre>
+<h1 id="user-content-more-commands"><a class="heading-link" href="#more-commands">More Commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h1>
+<h2 id="user-content-time-and-date-commands"><a class="heading-link" href="#time-and-date-commands">Time and Date commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h2>
+<ul>
+<li>Show current date and time</li>
+</ul>
+<pre><code>&gt; date
+</code></pre>
+<ul>
+<li>Wait for a given number of seconds before execute</li>
+</ul>
+<pre><code>&gt; sleep 10 # wait for 10 seconds
+</code></pre>
+<ul>
+<li>Find out how long the system has been up</li>
+</ul>
+<pre><code>&gt; uptime
+</code></pre>
+<h2 id="user-content-unix-system-status-commands"><a class="heading-link" href="#unix-system-status-commands">Unix System status commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h2>
+<ul>
+<li>Show or set server hostname</li>
+</ul>
+<pre><code>&gt; hostname
+</code></pre>
+<ul>
+<li>Display system load, who's logged in and what they are doing</li>
+</ul>
+<pre><code>&gt; w
+</code></pre>
+<ul>
+<li>Pring Unix system information</li>
+</ul>
+<pre><code>&gt; uname
+</code></pre>
+<h2 id="user-content-networking-commands"><a class="heading-link" href="#networking-commands">Networking commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h2>
+<ul>
+<li>Show and set IP address</li>
+</ul>
+<pre><code>&gt; ifconfig
+&gt; ip # this is only available in recent Linux versions
+</code></pre>
+<ul>
+<li>Check if remote host is reachable via ICMP ping</li>
+</ul>
+<pre><code>&gt; ping
+</code></pre>
+<ul>
+<li>Show network stats and routing information</li>
+</ul>
+<pre><code>&gt; netstat
+</code></pre>
+<h2 id="user-content-remote-access-commands"><a class="heading-link" href="#remote-access-commands">Remote access commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h2>
+<ul>
+<li>clear-text (insecure) remote access protocol. To see the connectivity from server to server.</li>
+</ul>
+<pre><code># telnet ip port
+&gt; telnet 192.168.1.1 22
+</code></pre>
+<ul>
+<li>Secure Shell : This Command will use to connect encrypted remote access client.</li>
+</ul>
+<pre><code># ssh remote_user@remote_Ip
+&gt; ssh hdfs@192.168.1.1
+</code></pre>
+<h2 id="user-content-file-transfer-commands"><a class="heading-link" href="#file-transfer-commands">File transfer commands<span aria-hidden="true" class="octicon octicon-link"></span></a></h2>
+<ul>
+<li>File transfer protocol client</li>
+</ul>
+<pre><code>&gt; ftp [options] [IP]
+</code></pre>
+<ul>
+<li>Secure ftp</li>
+</ul>
+<pre><code>&gt; sftp /user/rahul/testfile.txt hdfs@192.168.1.1
+</code></pre>
+<ul>
+<li>Secure copy protocol: This is secure (encrypted) version if cp command. Which Transfer file to secure servers.</li>
+</ul>
+<pre><code># scp /source_file_Path destination_user@destination_IP/Destination
+&gt; scp /user/rahul/testfile.txt hdfs@192.168.1.1
+</code></pre>
+<ul>
+<li>Download files from remote servers, HTTP/HTTPS and FTP.</li>
+</ul>
+<pre><code>&gt; wget http://apt.typesafe.com/repo-deb-build-0002.deb
+</code></pre>
 </article></body></html>

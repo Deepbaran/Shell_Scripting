@@ -33,9 +33,11 @@ I have executed all of these scripts in windows 10 with a wsl terminal.
     - 1 : Failure
 
 # Bash
-## Comparison operators:
-- Integer comparison
+- Comparison operators:
+    - Integer comparison
+    - String comparison
 ```
+# Integer comparison
 -eq - is qual to - if [ "$a" -eq "$b" ]
 -ne - is not equal to - if [ "$a" -ne "$b" ]
 -gt - is greater than - if [ "$a" -gt "$b" ]
@@ -46,9 +48,8 @@ I have executed all of these scripts in windows 10 with a wsl terminal.
 <=  - is less than or qual to - (("$a" <= "$b"))
 >   - is greater than - (("$a" > "$b"))
 >=  - is greater than or equal to - (("$a" >= "$b"))
-```
-- String comparison
-```
+
+# String comparison
 =   - is equal to - if [ "$a" = "$b" ]
 ==  - is equal to - if [ "$a" == "$b" ]
 !=  - is not equal to - if [ "$a" != "$b" ]
@@ -79,8 +80,19 @@ echo "Hello World" > test
 # The read content is "Hello World" in the terminal.
 # This will be directed to / flowed to the test file
 ```
+- Different ways to run a script in verbose debug mode
 
-# Commands
+    - ```
+      > bash -x ./script_name.sh
+      ```
+    - Use this at the top of the script "#! /bin/bash -x" instead of just "#! /bin/bash"
+    - Add the line "set -x" at the top of the script. This activates debugging from the point it is written. To stop debugging add the line "set +x" at the point where you want to stop debugging.
+- Setting the language of the terminal to C (If regex does not work properly)
+```
+> LANG=C # "C" is the language/locale setting and encoding
+```
+
+# Generic Commands
 
 - Type of Shells supported by the terminal
 ```
@@ -106,6 +118,13 @@ echo "Hello World" > test
 > touch 01_hello.sh
 ```
 - Check files in the directory
+    - Flags:
+        * -l   -   additional info  
+        * -lh  -   file size in human readable format 
+        * -lr  -   Sort the o/p in reverse order
+        * -lt  -   Sort files and directories y time and date of creation/modification
+        * -lrt -   Sort file names in the last modification time in reverse order.
+        * -la  -   Show hidden files
 ```
 > ls -al
 total 0
@@ -113,10 +132,14 @@ drwxrwxrwx 1 deepbaran deepbaran 4096 Sep 30 11:53 .
 drwxrwxrwx 1 deepbaran deepbaran 4096 Sep 30 11:54 ..
 -rwxrwxrwx 1 deepbaran deepbaran    0 Sep 30 11:53 01_hello.sh
 ```
-- To add or remove execute permission to a file [x]
+- To add or remove execute permission to a file/directory [x]
 ```
 > chmod +x 01_hello.sh # Add execute permission
 > chmod -x 01_hello.sh # remove execute permission
+```
+- Change file/directory ownership
+```
+> chown owner_name file_name
 ```
 - Execute the script
 ```
@@ -134,6 +157,10 @@ drwxrwxrwx 1 deepbaran deepbaran 4096 Sep 30 11:54 ..
 ```
 > mkdir dir
 ```
+- remove directory
+```
+> rmdir dir
+```
 - Change directory
 ```
 > cd dir
@@ -141,12 +168,41 @@ drwxrwxrwx 1 deepbaran deepbaran 4096 Sep 30 11:54 ..
 ```
 - Write text in a file (Type Ctrl+d to come out of the command)
 ```
-cat >> $file_name # This appends the text at the end of the file
-cat > $file_name # This will overwrite the contents in the file
+> cat >> $file_name # This appends the text at the end of the file
+> cat > $file_name # This will overwrite the contents in the file
 ```
 - Print the contents of a file
 ```
 > cat test
+> cat -n test # shows line numbers
+> cat file1.txt > file2.txt # copy the contents of file1.txt to file2.txt
+```
+- Print the contents of a file in reverse order
+```
+> tac test
+```
+- Display large files (screenful display)
+    - Navigate:
+        * ENTER key     -   To scroll down page by line
+        * Space bar     -   To move to the next page
+        * b key         -   To move to the previous page
+        * / key         -   To search the string
+```
+> more test
+```
+- Display the contents of a file or command output one page at a time
+```
+> less test
+```
+- Display 1st 10 lines of a file
+```
+> head test
+# use the -n option to display more lines
+```
+- Display last 10 lines of a file
+```
+> tail test
+# use the -n option to display more lines
 ```
 - To fetch the manual of a command
 ```
@@ -158,23 +214,133 @@ cat > $file_name # This will overwrite the contents in the file
 # This means, <echo "20.5+5"> is treated as input for bc command.
 echo "20.5+5" | bc
 ```
-- Setting the language of the terminal to C (If regex does not work properly)
-```
-> LANG=C # "C" is the language/locale setting and encoding
-```
 - Exit the shell script
 ```
 > exit
 ```
-- Remove a file
+- Remove a file or directory
 ```
 > rm file_path
 > rm -f file_path # forcefully remove a file
+> rm -r dir_path # recursively remove an empty directory
+> rm -rf file_path # recursively forcefully remove directory with contents 
 ```
-- Different ways to run a script in verbose debug mode
+- display the username of the current user
+```
+> whoami
+```
+- copy files and directories
+```
+> cp file file_backup
+# to copy a directory, including all its files and subdirectories, use any of the below flags:
+# -r
+# -R
+```
+- Move files and directories
+```
+> mv new_file.txt file.txt
+# This can be used to rename files or directories too
+```
+- locate the executable files or location of a program from the file system.
+```
+> which nano
+```
+- Set aliases to most used commands
+```
+> alias wr="cd /scripts"
+```
+- All the linux commands used in the past in the current terminal session
+```
+> history
+```
+- Search a file by file name in the database
+```
+> locate file_name
+# it faster then find command
+# add -i to make the search case in-sensitive
+# To search a file that contains two or more words, use asterisk (*)
 
-    - ```
-      > bash -x ./script_name.sh
-      ```
-    - Use this at the top of the script "#! /bin/bash -x" instead of just "#! /bin/bash"
-    - Add the line "set -x" at the top of the script. This activates debugging from the point it is written. To stop debugging add the line "set +x" at the point where you want to stop debugging.
+> find ./scripts -name *.txt
+# use the findcommand to locate files within a given directory.
+```
+- Search content from a file or command output
+```
+> history | grep which
+# This will search for all which contents from the history command output
+# The history command output is passed to the "grep which" command as argument because of the pipe.
+```
+
+# More Commands
+## Time and Date commands
+- Show current date and time
+```
+> date
+``` 
+- Wait for a given number of seconds before execute
+```
+> sleep 10 # wait for 10 seconds
+```
+- Find out how long the system has been up
+```
+> uptime
+```
+
+## Unix System status commands
+- Show or set server hostname
+```
+> hostname
+```
+- Display system load, who's logged in and what they are doing
+```
+> w
+```
+- Pring Unix system information
+```
+> uname
+```
+
+## Networking commands
+- Show and set IP address
+```
+> ifconfig
+> ip # this is only available in recent Linux versions
+```
+- Check if remote host is reachable via ICMP ping
+```
+> ping
+```
+- Show network stats and routing information
+```
+> netstat
+```
+
+## Remote access commands
+- clear-text (insecure) remote access protocol. To see the connectivity from server to server.
+```
+# telnet ip port
+> telnet 192.168.1.1 22
+```
+- Secure Shell : This Command will use to connect encrypted remote access client.
+```
+# ssh remote_user@remote_Ip
+> ssh hdfs@192.168.1.1
+```
+
+## File transfer commands
+- File transfer protocol client
+```
+> ftp [options] [IP]
+```
+- Secure ftp
+```
+> sftp /user/rahul/testfile.txt hdfs@192.168.1.1
+```
+- Secure copy protocol: This is secure (encrypted) version if cp command. Which Transfer file to secure servers.
+```
+# scp /source_file_Path destination_user@destination_IP/Destination
+> scp /user/rahul/testfile.txt hdfs@192.168.1.1
+```
+- Download files from remote servers, HTTP/HTTPS and FTP.
+```
+> wget http://apt.typesafe.com/repo-deb-build-0002.deb
+```
