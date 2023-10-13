@@ -344,3 +344,65 @@ echo "20.5+5" | bc
 ```
 > wget http://apt.typesafe.com/repo-deb-build-0002.deb
 ```
+
+## Process commands
+- Terminologies
+```
+PID     -   The process ID of each task
+User    -   The username of the task owner
+PR      -   Can be 20(highest) or -20(lowest)
+NI      -   The nice value of a task
+VIRT    -   Virtual memory used (kb)
+RES     -   Physical memory used (kb)
+SHR     -   Shared memory used (kb)
+S       -   Status
+%CPU    -   % of CPU time
+%MEM    -   Physical memory used
+TIME+   -   Total CPU time
+Command -   Command name
+```
+    - Five status types
+    ```
+    'D' -   uninterruptible sleep
+    'R' -   running
+    'S' -   sleeping
+    'T' -   traced or stopped
+    'z' -   zombie
+    ```
+- Commands:
+```
+bg          -   To send a process to the background
+fg          -   To run a stopped process in the foreground
+top         -   Details on all Active Processes
+ps          -   Give status of processes running for a user
+ps PID      -   Gives the status of a particular process
+pidof       -   Gives the Process ID (PID) of a process
+kill PID    -   Kills a process
+nice        -   Starts a process with a given priority
+renice      -   Changes priority of an already running process
+df          -   Gives free hard disk space on your system
+free        -   Gives free RAM on your system
+```
+
+## Networking commands
+```
+ifconfig        -   Display and manipulate route and network interfaces.
+ip              -   It is a replacement of ifconfig command.
+traceroute      -   Network troubleshooting utility.
+tracepath       -   Similar to traceroute but doesn't require root privileges.
+ping            -   To check connectivity between two nodes.
+netstat         -   Display connection information.
+ss              -   It is a replacement of netstat.
+dig             -   Query DNS related information.
+nslookup        -   Find DNS related query.
+route           -   Shows and manipulate IP routing table.
+host            -   Performs DNS lookups.
+arp             -   View or add contents of the kernel's ARP table.
+iwconfig        -   Used to configure wireless network interface.
+hostname        -   To identify a network name.
+curl or wget    -   To download a file from internet.
+mtr             -   Combines ping and tracepath into a single command.
+whois           -   Will tell you about the website's whois.
+ifplugstatus    -   Tells whether a cable is plugged in or not.
+
+```
